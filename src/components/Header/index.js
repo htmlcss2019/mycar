@@ -12,16 +12,21 @@ export default class Header extends Component {
     setInterval(()=>{
        let sysTime=Util.formateDate(new Date().getTime())
        this.setState({ sysTime})
-       console.log("scs");
     },1000)
     this.getWeatherAPIData();
     }
-    getWeatherAPIData(){
-      // let city='北京';
+    getWeatherAPIData(){ 
+ let city='北京';
 axios.jsonp({
- url:'https://devapi.qweather.com/v7/weather/now?location=101010100&key=qwqwcwvwvwaeeee'
+    url:'http://api.map.baidu.com/telematics/v3/weather?location='+encodeURIComponent(city)+'&output=json&ak=3p49MVra6urFRGOT9s8UBWr2'  
 }).then((res)=>{
-    console.log("res",res);
+    if(res.status==='success'){
+        let data=res.results[0].weather_data[0];
+        this.setState({
+            dayPicureUrl:data.dayPicureUrl,
+            weather:data.weather
+        })
+    }
 })
     }
     render() {
@@ -39,7 +44,9 @@ axios.jsonp({
                 </Col>
                 <Col span='20' className='weather'>
                     <span className='data'>{this.state.sysTime}</span>
-                    <span className='weather-detail'>晴转多云</span>
+                    <span className='weather-img'><img src={this.state.dayPicureUrl} alt=''/></span>
+                    <span className='weather-detail'>{this.state.weather}</span>
+
                 </Col>
             </Row>
             </div> 
