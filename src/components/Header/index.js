@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Row,Col } from 'antd'
 import './index.less'
-import axios from '../../axios'
+import axios from 'axios'
 import Util from '../utils/utils'
 export default class Header extends Component {
     state={}
@@ -16,17 +16,18 @@ export default class Header extends Component {
     this.getWeatherAPIData();
     }
     getWeatherAPIData(){ 
- let city='北京';
-axios.jsonp({
-    url:'http://api.map.baidu.com/telematics/v3/weather?location='+encodeURIComponent(city)+'&output=json&ak=3p49MVra6urFRGOT9s8UBWr2'  
-}).then((res)=>{
-    if(res.status==='success'){
-        let data=res.results[0].weather_data[0];
+//  let city='北京';
+axios.get(
+  'https://devapi.qweather.com/v7/weather/now?location=101010100&key=c3bfaa5f0cfe42119819c82344c89e11'  
+).then((res)=>{
+    // console.log("res",res);
+        let data=res.data.now;
+        // console.log("data",data);
         this.setState({
-            dayPicureUrl:data.dayPicureUrl,
-            weather:data.weather
+            text:data.text,
+            icon:data.icon
         })
-    }
+    
 })
     }
     render() {
@@ -44,9 +45,8 @@ axios.jsonp({
                 </Col>
                 <Col span='20' className='weather'>
                     <span className='data'>{this.state.sysTime}</span>
-                    <span className='weather-img'><img src={this.state.dayPicureUrl} alt=''/></span>
-                    <span className='weather-detail'>{this.state.weather}</span>
-
+                    <span className='weather-img'><img src={this.state.icon} alt=''/></span>
+                    <span className='weather-detail'>{this.state.text}</span>
                 </Col>
             </Row>
             </div> 

@@ -22,7 +22,7 @@ export default class Buttons extends Component {
   render() {
     return (
       <div>
-        <Card title='基础按钮'>
+        <Card title='基础按钮' className='card-wrap'>
             <Button type="primary">Imooc</Button>
             <Button>Imooc</Button>
             <Button type="dashed">Imooc</Button>
