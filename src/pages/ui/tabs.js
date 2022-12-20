@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {Card, Tabs,message, Icon} from 'antd'
-import { act } from 'react-dom/test-utils';
 const { TabPane } = Tabs;
 export default class Tabss extends Component {
     newTabIndex=0;
