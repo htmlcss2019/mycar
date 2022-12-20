@@ -5,7 +5,7 @@ import Login from './pages/login'
 import Admin from './admin'
 import Buttons from './pages/ui/buttons'
 import Modals from './pages/ui/modals'
-
+import Loadings from './pages/ui/loadings'
 import NoMatch from './pages/noMatch'
 export default class ERouter extends React.Component{
     render(){
@@ -19,6 +19,7 @@ export default class ERouter extends React.Component{
                                 <Switch>            
                                    <Route path="/ui/buttons" component={Buttons}/>
                                    <Route path="/ui/modals" component={Modals}/>
+                                   <Route path="/ui/loadings" component={Loadings}/>
 
                                    <Route component={NoMatch}/>
                                 </Switch>            
