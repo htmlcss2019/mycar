@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
-import {Card,Row,Col } from 'antd'
-import Item from 'antd/lib/list/Item'
+import {Card,Row,Col,Modal } from 'antd'
+// import Item from 'antd/lib/list/Item'
 export default class Gallery extends Component {
+    state={visible:false}
+    openGallery=(imgSrc)=>{
+        this.setState({
+            visible:true,
+            currentImg:'/gallery/'+imgSrc
+        })
+    }
     render() {
         const imgs=[
             ['1.png','2.png','3.png','4.png','5.png'],
@@ -12,7 +19,7 @@ export default class Gallery extends Component {
         ] 
         const imgList=imgs.map((list)=>{
             return list.map((item)=>
-            <Card  cover={<img src={'/gallery/'+item}/>}>
+            <Card style={{marginBottom:10}} cover={<img src={'/gallery/'+item} alt='' onClick={()=>this.openGallery(item)}/>}>
                < Card.Meta title='react Adim'
                description="Imooc"
                />
@@ -22,7 +29,7 @@ export default class Gallery extends Component {
         return (
             <div >
               
-                <Row> <Col md={5}>
+                <Row gutter={10}> <Col md={5}>
                         {imgList[0]}
                     </Col> <Col md={5}>
                         {imgList[1]}
@@ -36,6 +43,17 @@ export default class Gallery extends Component {
                     </Col>
                     
                 </Row>
+                <Modal width={300}
+                height={500}
+                visible={this.state.visible}
+                title='图片画廊'
+                onCancel={()=>{
+                    this.setState({
+                        visible:false
+                    })
+                }}footer={null}
+                
+                >{<img src={this.state.currentImg} alt=""style={{width:'100%'}}/>}</Modal>
                
             </div>
         )
