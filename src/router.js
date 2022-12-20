@@ -8,6 +8,9 @@ import Modals from "./pages/ui/modals";
 import Loadings from "./pages/ui/loadings";
 import NoMatch from "./pages/noMatch";
 import Notices from "./pages/ui/notice";
+import Messages from "./pages/ui/messages";
+import Tabs from "./pages/ui/tabs";
+import Gallery from "./pages/ui/gallery";
 export default class ERouter extends React.Component {
   render() {
     return (
@@ -24,6 +27,9 @@ export default class ERouter extends React.Component {
                     <Route path="/ui/modals" component={Modals} />
                     <Route path="/ui/loadings" component={Loadings} />
                     <Route path="/ui/notification" component={Notices} />
+                    <Route path="/ui/messages" component={Messages} />
+                    <Route path="/ui/tabs" component={Tabs} />
+                    <Route path="/ui/gallery" component={Gallery} />
 
                     <Route component={NoMatch} />
                   </Switch>
