@@ -20,7 +20,7 @@ export default class Header extends Component {
 axios.get(
   'https://devapi.qweather.com/v7/weather/now?location=101010100&key=c3bfaa5f0cfe42119819c82344c89e11'  
 ).then((res)=>{
-    // console.log("res",res);
+    console.log("res",res.data.now.text);
         let data=res.data.now;
         // console.log("data",data);
         this.setState({
