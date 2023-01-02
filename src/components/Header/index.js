@@ -20,7 +20,7 @@ export default class Header extends Component {
 axios.get(
   'https://devapi.qweather.com/v7/weather/now?location=101010100&key=c3bfaa5f0cfe42119819c82344c89e11'  
 ).then((res)=>{
-    console.log("res",res.data.now.text);
+    // console.log("res",res);
         let data=res.data.now;
         // console.log("data",data);
         this.setState({
@@ -31,10 +31,18 @@ axios.get(
 })
     }
     render() {
+        const menuType=this.props.menuType
         return (
             <div className='header'>
             <Row className='header-top'> 
-                <Col span='24'>
+            {
+                menuType?<Col span='6' className='logo'>
+                <img src="/assets/logo-ant.svg" alt=''/>
+                <span>通用管理系统</span>
+               </Col>:''
+            }
+            
+                <Col span={menuType?18:24}>
                     <span>欢迎，{this.state.username}</span>
                     <a href="javascript : ;">退出</a>
                 </Col> 
