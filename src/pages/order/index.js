@@ -46,12 +46,12 @@ export default class Order extends React.Component{
     }
     requestList = ()=>{
         let _this = this;
-        axios.get(
-        'https://www.fastmock.site/mock/0d3e0fa5f65bb4cb711295a72e204c65/mockapi/order/list',
-            // data:{
-            //     params: this.params
-            // }
-        ).then((res)=>{
+        axios({
+       url: 'https://www.fastmock.site/mock/0d3e0fa5f65bb4cb711295a72e204c65/mockapi/order/list',
+            data:{
+                params: this.params
+            }
+         } ).then((res)=>{
             // console.log("res",res);
             let list = res.data.result.item_list.map((item, index) => {
                 item.key = index;
@@ -76,18 +76,18 @@ export default class Order extends React.Component{
             })
             return;
         }
-        axios.get(
-          'https://www.fastmock.site/mock/0d3e0fa5f65bb4cb711295a72e204c65/mockapi/order/ebike_info',
-            // data:{
-            //     params:{
-            //         orderId: item.id
-            //     }
-            // }
-          ).then((res)=>{
+        axios({
+         url: 'https://www.fastmock.site/mock/0d3e0fa5f65bb4cb711295a72e204c65/mockapi/order/ebike_info',
+            data:{
+                params:{
+                    orderId: item.id
+                }
+            }
+        }).then((res)=>{
             console.log("res",res);
             if(res.code ===0 ){
                 this.setState({
-                    orderInfo:res.data.result,
+                    orderInfo:res.data.data.result,
                     orderConfirmVisble: true
                 })
             }
@@ -97,17 +97,17 @@ export default class Order extends React.Component{
     // 结束订单
     handleFinishOrder = ()=>{
          let item = this.state.selectedItem;
-        axios.get(
-    'https://www.fastmock.site/mock/0d3e0fa5f65bb4cb711295a72e204c65/mockapi/order/finish_order',
+        axios({
+   url:'https://www.fastmock.site/mock/0d3e0fa5f65bb4cb711295a72e204c65/mockapi/order/finish_order',
         //  url:"/order/finish_order",
-            // data: {
-            //     params: {
-            //         orderId: item.id
-            //     }
-            // }
-         ).then((res) => {
+            data: {
+                params: {
+                    orderId: item.id
+                }
+            }
+        }).then((res) => {
             console.log("res",res);
-            if (res.code === 0) {
+            if (res.code === "0") {
                 message.success('订单结束成功')
                 this.setState({
                     orderConfirmVisble: false

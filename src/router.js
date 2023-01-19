@@ -21,7 +21,13 @@ import City from "./pages/city";
 import Order from './pages/order/index'
 import Common from './common'
 import OrderDetail from './pages/order/detail'
-import User from "./pages/user";
+import User from "./pages/ui/user";
+import BikeMap from "./pages/map/bikeMap";
+import Bar from "./pages/echarts/bar";
+import Pie from "./pages/echarts/pie";
+import Line from "./pages/echarts/line";
+import RichText from "./pages/rich";
+import PermssionUser from "./pages/permission";
 export default class ERouter extends React.Component {
   render() {
     return (
@@ -55,14 +61,18 @@ export default class ERouter extends React.Component {
                     <Route path="/city" component={City} />
                     <Route path="/order" component={Order} />
                     <Route path="/user" component={User} />
+                    <Route path="/bikeMap" component={BikeMap} />
+                    <Route path="/charts/bar" component={Bar} />
+                    <Route path="/charts/pie" component={Pie} />
+                    <Route path="/charts/line" component={Line} />
+                    <Route path="/rich" component={RichText} />
+                    <Route path="/permission" component={PermssionUser} />
 
                     <Route component={NoMatch} />
                   </Switch>
                 </Admin>
               )}
             />
-           
-
          </Switch>
         </App>
       </HashRouter>

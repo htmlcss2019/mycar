@@ -17,18 +17,18 @@ export default class Header extends Component {
     }
     getWeatherAPIData(){ 
 //  let city='北京';
-axios.get(
-  'https://devapi.qweather.com/v7/weather/now?location=101010100&key=c3bfaa5f0cfe42119819c82344c89e11'  
-).then((res)=>{
-    // console.log("res",res);
-        let data=res.data.now;
-        // console.log("data",data);
-        this.setState({
-            text:data.text,
-            icon:data.icon
-        })
+// axios.get(
+//   'https://devapi.qweather.com/v7/weather/now?location=101010100&key=c3bfaa5f0cfe42119819c82344c89e11'  
+// ).then((res)=>{
+//     // console.log("res",res);
+//         let data=res.data.now;
+//         // console.log("data",data);
+//         this.setState({
+//             text:data.text,
+//             icon:data.icon
+//         })
     
-})
+// })
     }
     render() {
         const menuType=this.props.menuType

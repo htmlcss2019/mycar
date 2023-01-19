@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Button, Table, Form, Select, Modal, message } from 'antd';
-import axios from '../../axios/index';
+import axios from 'axios';
 import Utils from './../../utils/utils';
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -20,16 +20,16 @@ export default class City extends React.Component{
     // 默认请求我们的接口数据
     requestList = ()=>{
         let _this = this;
-        axios.ajax({
-            url: '/open_city',
-            data:{
-                params:{
-                    page:this.params.page
-                }
-            }
-        }).then((res)=>{
+        axios.get(
+            'https://www.fastmock.site/mock/0d3e0fa5f65bb4cb711295a72e204c65/mockapi/open_city',
+            // data:{
+            //     params:{
+            //         page:this.params.page
+            //     }
+            // }
+        ).then((res)=>{
             console.log(res);
-            let list = res.result.item_list.map((item, index) => {
+            let list = res.data.result.item_list.map((item, index) => {
                 item.key = index;
                 return item;
             });
@@ -53,12 +53,12 @@ export default class City extends React.Component{
     handleSubmit = ()=>{
         let cityInfo = this.cityForm.props.form.getFieldsValue();
         console.log(cityInfo);
-        axios.ajax({
-            url:'/city/open',
-            data:{
-                params:cityInfo
-            }
-        }).then((res)=>{
+        axios.get(
+            'https://www.fastmock.site/mock/0d3e0fa5f65bb4cb711295a72e204c65/mockapi',
+            // data:{
+            //     params:cityInfo
+            // }
+        ).then((res)=>{
             if(res.code === '0'){
                 message.success('开通成功');
                 this.setState({

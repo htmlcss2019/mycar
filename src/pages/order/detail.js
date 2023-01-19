@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Card } from 'antd'
-import './detail.less'
 import axios from 'axios'
-export default class datail extends Component {
+import './detail.less'
+
+export default class Datail extends Component {
 
     state = {
-        orderInfo:{}
+        orderInfo:{}    
     }
+    map={}
 
     componentDidMount(){
         let orderId = this.props.match.params.orderId;
@@ -22,6 +24,7 @@ export default class datail extends Component {
             url:'https://www.fastmock.site/mock/0d3e0fa5f65bb4cb711295a72e204c65/mockapi/order/detail'
         }).then((res)=>{
             console.log(res);
+            
                 this.setState({
                     orderInfo:res.data.result
                 })
@@ -31,7 +34,7 @@ export default class datail extends Component {
     }
 
     renderMap = (result)=>{
-        this.map = new window.BMap.Map('orderDetailMap');
+        this.map = new window.BMapGL.Map('orderDetailMap');
         // this.map.centerAndZoom('北京',11);
         // 添加地图控件
         this.addMapControl();
@@ -44,9 +47,9 @@ export default class datail extends Component {
     // 添加地图控件
     addMapControl = ()=>{
         let map = this.map;
-        map.addControl(new window.BMap.ScaleControl({ anchor: window.BMAP_ANCHOR_TOP_RIGHT}));
-        map.addControl(new window.BMap.NavigationControl({ anchor: window.BMAP_ANCHOR_TOP_RIGHT }));
-    }
+        map.addControl(new window.BMapGL.ScaleControl({ anchor: window.BMapGL_ANCHOR_TOP_RIGHT}));
+        map.addControl(new window.BMapGL.NavigationControl({ anchor: window.BMapGL_ANCHOR_TOP_RIGHT }));
+    }    
 
     // 绘制用户的行驶路线
     drawBikeRoute = (positionList)=>{
@@ -56,30 +59,30 @@ export default class datail extends Component {
         if (positionList.length>0){
             let first = positionList[0];
             let last = positionList[positionList.length-1];
-            startPoint = new window.BMap.Point(first.lon,first.lat);
-            let startIcon = new window.BMap.Icon('/assets/start_point.png',new window.BMap.Size(36,42),{
-                imageSize:new window.BMap.Size(36,42),
-                anchor: new window.BMap.Size(18, 42)
+            startPoint = new window.BMapGL.Point(first.lon,first.lat);
+            let startIcon = new window.BMapGL.Icon('/assets/start_point.png',new window.BMapGL.Size(36,42),{
+                imageSize:new window.BMapGL.Size(36,42),
+                anchor: new window.BMapGL.Size(18, 42)
             })
 
-            let startMarker = new window.BMap.Marker(startPoint, { icon: startIcon});
+            let startMarker = new window.BMapGL.Marker(startPoint, { icon: startIcon});
             this.map.addOverlay(startMarker);
 
-            endPoint = new window.BMap.Point(last.lon, last.lat);
-            let endIcon = new window.BMap.Icon('/assets/end_point.png', new window.BMap.Size(36, 42), {
-                imageSize: new window.BMap.Size(36, 42),
-                anchor: new window.BMap.Size(18, 42)
+            endPoint = new window.BMapGL.Point(last.lon, last.lat);
+            let endIcon = new window.BMapGL.Icon('/assets/end_point.png', new window.BMapGL.Size(36, 42), {
+                imageSize: new window.BMapGL.Size(36, 42),
+                anchor: new window.BMapGL.Size(18, 42)
             })
-            let endMarker = new window.BMap.Marker(endPoint, { icon: endIcon });
+            let endMarker = new window.BMapGL.Marker(endPoint, { icon: endIcon });
             this.map.addOverlay(endMarker);
 
             let trackPoint = [];
             for(let i=0;i<positionList.length;i++){
                 let point = positionList[i];
-                trackPoint.push(new window.BMap.Point(point.lon, point.lat));
+                trackPoint.push(new window.BMapGL.Point(point.lon, point.lat));
             }
 
-            let polyline = new window.BMap.Polyline(trackPoint,{
+            let polyline = new window.BMapGL.Polyline(trackPoint,{
                 strokeColor:'#1869AD',
                 strokeWeight:3,
                 strokeOpacity:1
@@ -96,10 +99,10 @@ export default class datail extends Component {
         let trackPoint = [];
         for (let i = 0; i < positionList.length; i++) {
             let point = positionList[i];
-            trackPoint.push(new window.BMap.Point(point.lon, point.lat));
+            trackPoint.push(new window.BMapGL.Point(point.lon, point.lat));
         }
         // 绘制服务区
-        let polygon = new window.BMap.Polygon(trackPoint, {
+        let polygon = new window.BMapGL.Polygon(trackPoint, {
             strokeColor: '#CE0000',
             strokeWeight: 4,
             strokeOpacity: 1,

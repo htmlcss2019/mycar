@@ -1,5 +1,5 @@
 import React from 'react'
-import Utils from '../utils/utils'
+// import Utils from '../../utils/utils'
 import {Table} from 'antd'
 import  "./index.less"
 export default class ETable extends React.Component {
